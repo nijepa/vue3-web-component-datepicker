@@ -1,11 +1,14 @@
 <template>
   <div ref="datepickerWrapper">
-    <Datepicker 
-    :modelValue="date" 
-    @update:modelValue="handleDate" 
-    :minDate="propdate" 
-    format="MMM/dd/yyyy"
-    :disabled="disabled" 
+    <Datepicker
+    :modelValue="date"
+    @update:modelValue="handleDate"
+    locale="de"
+    :minDate="propdate"
+    format="MMM, dd yyyy"
+    :disabled="disabled"
+    selectText="Pick"
+    cancelText="Close"
     >
   </Datepicker>
   </div>
@@ -49,6 +52,7 @@ watch(
 // creating & emitting events
 const emit = defineEmits(["selected"]);
 const datepickerWrapper = ref(null);
+const font = ref("'Open Sans', sans-serif")
 </script>
 <style lang="scss">
 // General
@@ -138,7 +142,8 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
 }
 
 .dp__main {
-  font-family: $dp__font_family;
+  font-family: v-bind(font);
+  //font-family: $dp__font_family;
   user-select: none;
   box-sizing: border-box;
 }
@@ -167,6 +172,8 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
   padding: $dp__common_padding;
   box-sizing: border-box;
   height: $dp__button_height;
+// added to hide time button
+  display: none !important;
 
   &:hover {
     background: var(--dp-hover-color);
@@ -268,7 +275,8 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
 .dp__input {
   background-color: var(--dp-background-color);
   border-radius: $dp__border_radius;
-  font-family: $dp__font_family;
+  //font-family: $dp__font_family;
+  font-family: v-bind(font);
   border: 1px solid var(--dp-border-color);
   outline: none;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -362,7 +370,8 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
   background: var(--dp-background-color);
   border-radius: $dp__border_radius;
   min-width: $dp__menu_min_width;
-  font-family: $dp__font_family;
+  font-family: v-bind(font);
+  //font-family: $dp__font_family;
   font-size: $dp__font_size;
   user-select: none;
   border: 1px solid var(--dp-menu-border-color);
@@ -483,7 +492,8 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: $dp__font_family;
+  font-family: v-bind(font);
+  //font-family: $dp__font_family;
   flex: 0;
 }
 
@@ -818,7 +828,8 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
   left: 0;
   transition: opacity 1s ease-out;
   z-index: 99999;
-  font-family: $dp__font_family;
+  font-family: v-bind(font);
+  //font-family: $dp__font_family;
   color: var(--dp-text-color);
   box-sizing: border-box;
 }
@@ -951,7 +962,8 @@ $dp__time_font_size: 2rem !default; // font size in the time picker
   align-items: center;
   justify-content: center;
   user-select: none;
-  font-family: $dp__font_family;
+  font-family: v-bind(font);
+  //font-family: $dp__font_family;
   color: var(--dp-text-color);
 }
 
