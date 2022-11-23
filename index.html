@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>Vue Web Components!</h1>
+      <custom-datepicker></custom-datepicker>
+      <input id="deliveryTime" hidden />
+    </div>
+    <script type="module" src="/main.js"></script>
+    <script>
+      const datepicker = document.querySelector('custom-datepicker');
+      function setAttributes(el, attrs) {
+        for(var key in attrs) {
+          el.setAttribute(key, attrs[key]);
+        }
+      }
+      const n = 2; //number of days to add.
+      const today = new Date(); //Today's Date
+      const requiredDate = new Date(today.getFullYear(),today.getMonth(),today.getDate() + n)
+      datepicker.setAttribute("propdate", requiredDate);
+      const sel = document.querySelector('#deliveryTime')
+      const dateSelected = (e) => {
+        let dateFormat = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit', year: 'numeric' })
+        const d =  dateFormat.format(e.detail.val)
+        //const d = new Date(e.detail.val)
+        console.log(e.detail.val, d)
+        sel.value = d;
+      }
+      window.addEventListener('selected', dateSelected);
+    </script>
+  </body>
+</html>
