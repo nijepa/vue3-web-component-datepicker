@@ -16,8 +16,8 @@
   <body>
     <div id="app">
       <h1>Vue Web Components!</h1>
-      <custom-datepicker></custom-datepicker>
-      <input id="deliveryTime" hidden />
+      <custom-datepicker ></custom-datepicker>
+      <input id="deliveryTime"  />
     </div>
     <script type="module" src="/main.js"></script>
     <script>
@@ -30,15 +30,17 @@
       const n = 2; //number of days to add.
       const today = new Date(); //Today's Date
       const requiredDate = new Date(today.getFullYear(),today.getMonth(),today.getDate() + n)
-      datepicker.setAttribute("propdate", requiredDate);
+      datepicker.setAttribute("propdate", '26.11.2022');
+      datepicker.setAttribute("id", 'deliveryTime1');
       const sel = document.querySelector('#deliveryTime')
       const dateSelected = (e) => {
         let dateFormat = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit', year: 'numeric' })
         const d =  dateFormat.format(e.detail.val)
         //const d = new Date(e.detail.val)
         console.log(e.detail.val, d)
-        sel.value = d;
+        sel.value = e.detail.val;
       }
+      console.log(sel.value)
       window.addEventListener('selected', dateSelected);
     </script>
   </body>

@@ -1,16 +1,18 @@
 <template>
   <div ref="datepickerWrapper">
     <Datepicker
-    :modelValue="date"
-    @update:modelValue="handleDate"
-    locale="de"
-    :minDate="propdate"
-    format="MMM, dd yyyy"
-    :disabled="disabled"
-    selectText="Pick"
-    cancelText="Close"
+      :modelValue="date"
+      @update:modelValue="handleDate"
+      locale="de"
+      :minDate="setDate()"
+      format="MMM dd, yyyy"
+      :disabled="isDisabled"
+      selectText="Auswählen"
+      cancelText="Abbrechen"
+      :enableTimePicker="false"
     >
   </Datepicker>
+  <!-- <input :id="id.slice(0, -1)" :value="dateSelected()" /> -->
   </div>
 </template>
 
@@ -26,38 +28,67 @@ import '@vuepic/vue-datepicker/dist/main.css';
 // setting props
 const props = defineProps({
   propdate: {
-    type: Date,
+    type: String,
     default: new Date()
   },
   disabled: {
     type: String,
-    default: false
+    default: 'false'
+  },
+  id: {
+    type: String,
+    default: 'deliveryTime'
   }
 });
-const date = ref(props.propdate);
+const isDisabled = computed(() => {
+  return props.disabled !== 'false'
+})
+const datepickerWrapper = ref(null);
+const font = ref("'Open Sans', sans-serif")
+
+const setDate = () => {
+  if (isNaN(props.propdate)) {
+    const [day, month, year] = props.propdate.split('.');
+    return new Date(+year, +month - 1, +day)
+  }
+  return props.propdate
+}
+const date = ref(setDate());
 const handleDate = (modelData) => {
   date.value = modelData;
 }
 watch(
   () => date.value,
   (newValue, oldValue) => {
+    console.log(newValue)
+    const value = dateSelected(newValue)
     const dateVal = new CustomEvent("selected", {
       bubbles: true,
       composed: true,
-      detail: { val: newValue }
+      detail: { val: value }
     })
     datepickerWrapper.value.dispatchEvent(dateVal);
   }
 );
+
+const dateSelected = (e) => {
+  if (isNaN(e)) {
+    console.log(0)
+    let dateFormat = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit', year: 'numeric' })
+    return dateFormat.format(e)
+  }
+  return e
+}
+// defineExpose({
+//   date
+// })
 // creating & emitting events
 const emit = defineEmits(["selected"]);
-const datepickerWrapper = ref(null);
-const font = ref("'Open Sans', sans-serif")
 </script>
 <style lang="scss">
 // General
-$dp__font_family: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, oxygen, ubuntu, cantarell, "Open Sans",
-  "Helvetica Neue", sans-serif !default; // Font size for the menu
+$dp__font_family: "Open Sans", sans-serif !default; // Font size for the menu
+//$dp__font_family: -apple-system, blinkmacsystemfont, "Segoe UI", roboto, oxygen, ubuntu, cantarell, "Open Sans", "Helvetica Neue", sans-serif !default; // Font size for the menu
 $dp__border_radius: 4px !default; // Border radius everywhere
 $dp__cell_border_radius: $dp__border_radius !default; // Specific border radius for the calendar cell
 
