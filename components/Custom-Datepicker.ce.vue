@@ -1,5 +1,5 @@
 <template>
-  <div ref="datepickerWrapper" :id="id" >
+  <div ref="datepickerWrapper" >
     <Datepicker
       :modelValue="date"
       @update:modelValue="handleDate"
@@ -14,11 +14,11 @@
   </Datepicker>
   </div>
 </template>
-<!-- <script>
+<script>
 export default{
   inheritAttrs: false
 }
-</script> -->
+</script>
 <script setup>
 import { ref, computed, watch, useAttrs } from "vue";
 import Datepicker from '@vuepic/vue-datepicker';
@@ -33,10 +33,10 @@ const props = defineProps({
     type: String,
     default: 'false'
   },
-  id: {
-    type: String,
-    default: 'deliveryTime'
-  }
+  // id: {
+  //   type: String,
+  //   default: 'deliveryTime'
+  // }
 });
 const isDisabled = computed(() => {
   return props.disabled !== 'false'
