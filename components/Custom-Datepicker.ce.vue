@@ -1,5 +1,5 @@
 <template>
-  <div ref="datepickerWrapper">
+  <div ref="datepickerWrapper" :id="id" >
     <Datepicker
       :modelValue="date"
       @update:modelValue="handleDate"
@@ -12,10 +12,8 @@
       :enableTimePicker="false"
     >
   </Datepicker>
-  <!-- <input :id="id.slice(0, -1)" :value="dateSelected()" /> -->
   </div>
 </template>
-
 <!-- <script>
 export default{
   inheritAttrs: false
@@ -60,7 +58,6 @@ const handleDate = (modelData) => {
 watch(
   () => date.value,
   (newValue, oldValue) => {
-    console.log(newValue)
     const value = dateSelected(newValue)
     const dateVal = new CustomEvent("selected", {
       bubbles: true,
@@ -72,12 +69,12 @@ watch(
 );
 
 const dateSelected = (e) => {
-  if (isNaN(e)) {
-    console.log(0)
-    let dateFormat = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit', year: 'numeric' })
-    return dateFormat.format(e)
+  if (e) {
+    const d = new Date(e.toString())
+    let dateFormat = new Intl.DateTimeFormat('de', { month: '2-digit', day: '2-digit', year: 'numeric' })
+    return dateFormat.format(d)
   }
-  return e
+  return ''
 }
 // defineExpose({
 //   date

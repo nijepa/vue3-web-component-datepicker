@@ -16,8 +16,8 @@
   <body>
     <div id="app">
       <h1>Vue Web Components!</h1>
-      <custom-datepicker ></custom-datepicker>
-      <input id="deliveryTime"  />
+      <custom-datepicker id="deliveryTime"></custom-datepicker>
+      <input id="text">
     </div>
     <script type="module" src="/main.js"></script>
     <script>
@@ -27,20 +27,19 @@
           el.setAttribute(key, attrs[key]);
         }
       }
-      const n = 2; //number of days to add.
-      const today = new Date(); //Today's Date
-      const requiredDate = new Date(today.getFullYear(),today.getMonth(),today.getDate() + n)
+      // const n = 2; //number of days to add.
+      // const today = new Date(); //Today's Date
+      // const requiredDate = new Date(today.getFullYear(),today.getMonth(),today.getDate() + n)
       datepicker.setAttribute("propdate", '26.11.2022');
-      datepicker.setAttribute("id", 'deliveryTime1');
-      const sel = document.querySelector('#deliveryTime')
+      //datepicker.setAttribute("id", 'deliveryTime');
+      //datepicker.setAttribute("value", null);
+      //const sel = document.querySelector('#deliveryTime')
       const dateSelected = (e) => {
-        let dateFormat = new Intl.DateTimeFormat('en', { month: 'short', day: '2-digit', year: 'numeric' })
-        const d =  dateFormat.format(e.detail.val)
-        //const d = new Date(e.detail.val)
-        console.log(e.detail.val, d)
-        sel.value = e.detail.val;
+        datepicker.value = e.detail.val;
+        const res = document.querySelector('#text')
+        res.value = datepicker.value
+        console.log(5, datepicker.value)
       }
-      console.log(sel.value)
       window.addEventListener('selected', dateSelected);
     </script>
   </body>
