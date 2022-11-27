@@ -1,14 +1,15 @@
 <template>
-  <div ref="datepickerWrapper" >
+  <div ref="datepickerWrapper">
+    <!--:modelValue="date"
+      @update:modelValue="handleDate"-->
     <Datepicker
-      :modelValue="date"
-      @update:modelValue="handleDate"
+      v-model="date"
       locale="de"
       :minDate="setDate()"
       format="MMM dd, yyyy"
       :disabled="isDisabled"
-      selectText="Auswählen"
-      cancelText="Abbrechen"
+      :selectText="selectText"
+      :cancelText="cancelText"
       :enableTimePicker="false"
     >
   </Datepicker>
@@ -33,6 +34,14 @@ const props = defineProps({
     type: String,
     default: 'false'
   },
+  selectText: {
+    type: String,
+    default: 'Auswählen'
+  },
+  cancelText: {
+    type: String,
+    default: 'Abbrechen'
+  },
   // id: {
   //   type: String,
   //   default: 'deliveryTime'
@@ -44,17 +53,30 @@ const isDisabled = computed(() => {
 const datepickerWrapper = ref(null);
 const font = ref("'Open Sans', sans-serif")
 
+function isDateGreater (d1, days) {
+  const [day, month, year] = d1.split('.')
+  d1 = new Date(+year, +month - 1, +day)
+  let today = new Date()
+  let d2 = new Date(today.setDate(today.getDate() + 2));
+  console.log('1', d1, '2', d2, +new Date(d1) > today.setDate(today.getDate() + (days||0)))
+  //return +new Date(d1) > today.setDate(today.getDate() + (days||0))
+  return +new Date(d1) > today.setDate(today.getDate() + (days||0)) ? d1 : d2
+}
+
 const setDate = () => {
   if (isNaN(props.propdate)) {
-    const [day, month, year] = props.propdate.split('.');
-    return new Date(+year, +month - 1, +day)
+    //isDateGreater(props.propdate, 2)
+    // console.log(9, isDateGreater(props.propdate, 2))
+    // const [day, month, year] = props.propdate.split('.');
+    // return new Date(+year, +month - 1, +day)
+    return isDateGreater(props.propdate, 2)
   }
   return props.propdate
 }
 const date = ref(setDate());
-const handleDate = (modelData) => {
-  date.value = modelData;
-}
+// const handleDate = (modelData) => {
+//   date.value = modelData;
+// }
 watch(
   () => date.value,
   (newValue, oldValue) => {
@@ -76,9 +98,9 @@ const dateSelected = (e) => {
   }
   return ''
 }
-// defineExpose({
-//   date
-// })
+defineExpose({
+  date
+})
 // creating & emitting events
 const emit = defineEmits(["selected"]);
 </script>
