@@ -1,6 +1,6 @@
 # custom-toast
 
-## Vite, Vue3 web-component `custom-toast`
+## Vite, Vue3 web-component `custom-datepicker`
 ### (standalone web component made with Vue3 & Vite)
 
 ## [![Generic badge](https://img.shields.io/badge/:-HTML-red.svg?style=flat&logo=HTML5)](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5) [![Generic badge](https://img.shields.io/badge/:-CSS-blue.svg?style=flat&logo=CSS3)](https://www.tutorialrepublic.com/css-tutorial/) [![Generic badge](https://img.shields.io/badge/:-JavaScript-yellow.svg?style=flat&logo=JavaScript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript) [![Generic badge](https://img.shields.io/badge/:-VUE.js-BRIGHTGREEN.svg?style=flat&logo=Vue.js)](https://vuejs.org/) [![Generic badge](https://img.shields.io/badge/:-Vite-darkblue.svg?style=flat&logo=Vite)](https://vitejs.dev/)
@@ -14,17 +14,12 @@
   <link rel="modulepreload" href="/vue.js" />
 ```
 
-## Place component 
+## Place component
 #### with or without attributes (named slot can be passed):
 ```html
-  <custom-toast />
+  <custom-datepicker />
   // OR
-  <custom-toast is-active toast-data toast-style>
-    <span slot="additionalData">
-      <h3>additional info in slot</h3>
-      <p>tandar mandara broc</p>
-    </span>
-  </custom-toast>
+  <custom-datepicker id="deliveryTime" propdate="02.12.2022"></custom-datepicker>
 ```
 ## Reference and activate component
 ```js
@@ -56,14 +51,14 @@
 ```
 #### - *passing attributes example:*
 ```js
-  const td = { title: 'some title', 
-              message: 'some message', 
+  const td = { title: 'some title',
+              message: 'some message',
               type: 'info',
-              position: 'center', 
-              decoration: false, 
-              colorized: false, 
-              backdrop: false, 
-              color: "#ffffff", 
+              position: 'center',
+              decoration: false,
+              colorized: false,
+              backdrop: false,
+              color: "#ffffff",
               font: "'Open Sans', sans-serif" }
 
   setAttributes(toast, td)
@@ -72,15 +67,15 @@
 
 
 ### With props
-#####   Set component attribute `toast-data` as JSON with following properties: 
+#####   Set component attribute `toast-data` as JSON with following properties:
 - ***`title`*** (String)
 - ***`message`*** (String - *can be used html*)
 - ***`type`*** (String - *info, success, error*)
 
-#### - *passing content example* 
+#### - *passing content example*
 ```js
-  const td = { title: 'some title', 
-              message: 'some message', 
+  const td = { title: 'some title',
+              message: 'some message',
               type: 'info' }
 
   toast.setAttribute('toast-data', JSON.stringify(td))
@@ -95,11 +90,11 @@
 
 ### - ***passing styles example:***
 ```js
-  const ts = { position: 'center', 
-              decoration: false, 
-              colorized: false, 
-              backdrop: false, 
-              color: "#ffffff", 
+  const ts = { position: 'center',
+              decoration: false,
+              colorized: false,
+              backdrop: false,
+              color: "#ffffff",
               font: "'Open Sans', sans-serif" }
 
   toast.setAttribute('toast-style', JSON.stringify(ts))
