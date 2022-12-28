@@ -16,7 +16,7 @@
   <body>
     <div id="app">
       <h1>Vue Web Components!</h1>
-      <custom-datepicker id="deliveryTime" propdate="02.12.2022" value="{date}"></custom-datepicker>
+      <custom-datepicker id="deliveryTime" propdate="02.12.2022" ></custom-datepicker>
       <input id="text">
     </div>
     <script type="module" src="/main.js"></script>
@@ -35,10 +35,10 @@
       //datepicker.setAttribute("value", null);
       const sel = document.querySelector('#deliveryTime')
       const dateSelected = (e) => {
-        datepicker.value = e.detail.val;
-        const res = document.querySelector('#text')
-        res.value = datepicker.value
-        console.log(7, datepicker.value)
+        // datepicker.value = e.detail.val;
+        // const res = document.querySelector('#text')
+        // res.value = datepicker.value
+        // console.log(7, datepicker.value)
       }
       window.addEventListener('selected', dateSelected);
     </script>
