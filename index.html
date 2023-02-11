@@ -12,6 +12,11 @@
       rel="stylesheet"
     />
   </head>
+  <style>
+    #deliveryTime {
+      display: flex;
+    }
+  </style>
 
   <body>
     <div id="app">
@@ -33,6 +38,7 @@
       //datepicker.setAttribute("propdate", '26.11.2022');
       //datepicker.setAttribute("id", 'deliveryTime');
       //datepicker.setAttribute("value", null);
+      datepicker.setAttribute("year-picker", false)
       const sel = document.querySelector('#deliveryTime')
       const dateSelected = (e) => {
         // datepicker.value = e.detail.val;

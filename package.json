@@ -1,6 +1,6 @@
 {
   "name": "datepicker-web-component",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "author": "Nikola Pavicevic <nijepa@gmail.com>",
   "description": "Vue3 web-component datepicker with Vite",
   "keywords": [
@@ -16,12 +16,12 @@
     "serve": "vite preview"
   },
   "devDependencies": {
-    "sass": "^1.57.1",
-    "vite": "^4.0.2"
+    "sass": "^1.58.0",
+    "vite": "^4.1.1"
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^4.0.0",
-    "@vuepic/vue-datepicker": "^3.6.3",
-    "vue": "^3.2.45"
+    "@vuepic/vue-datepicker": "^3.6.8",
+    "vue": "^3.2.47"
   }
 }

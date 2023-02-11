@@ -9,8 +9,10 @@
       :selectText="selectText"
       :cancelText="cancelText"
       :enableTimePicker="false"
-    >
-  </Datepicker>
+      :yearPicker="pickerType('yearPicker')"
+      :monthPicker="pickerType('monthPicker')"
+      :weekPicker="pickerType('weekPicker')"
+    />
   </div>
 </template>
 <script>
@@ -40,6 +42,18 @@ const props = defineProps({
     type: String,
     default: 'Abbrechen'
   },
+  yearPicker: {
+    type: String,
+    default: 'false'
+  },
+  monthPicker: {
+    type: String,
+    default: 'false'
+  },
+  weekPicker: {
+    type: String,
+    default: 'false'
+  }
   // id: {
   //   type: String,
   //   default: 'deliveryTime'
@@ -48,6 +62,12 @@ const props = defineProps({
 const isDisabled = computed(() => {
   return props.disabled !== 'false'
 })
+
+const pickerType = (type) => {
+  console.log(9, props[type])
+  return props[type] !== 'false'
+}
+
 const datepickerWrapper = ref(null);
 const font = ref("'Open Sans', sans-serif")
 
