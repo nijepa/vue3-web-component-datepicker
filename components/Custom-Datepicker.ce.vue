@@ -53,6 +53,10 @@ const props = defineProps({
   weekPicker: {
     type: String,
     default: 'false'
+  },
+  font: {
+    type: String,
+    default: "'Open Sans', sans-serif"
   }
   // id: {
   //   type: String,
@@ -64,12 +68,10 @@ const isDisabled = computed(() => {
 })
 
 const pickerType = (type) => {
-  console.log(9, props[type])
   return props[type] !== 'false'
 }
 
 const datepickerWrapper = ref(null);
-const font = ref("'Open Sans', sans-serif")
 
 function isDateGreater (d1, days) {
   const [day, month, year] = d1.split('.')
@@ -137,7 +139,7 @@ $dp__cell_border_radius: $dp__border_radius !default; // Specific border radius 
 
 // Transitions
 $dp__transition_length: 22px !default; // Passed to the translateX in animation
-$dp__transition_duration: 0.1s !default; // Transition duration
+$dp__transition_duration: 0.5s !default; // Transition duration
 
 // Sizing
 $dp__common_padding: 10px !default;
